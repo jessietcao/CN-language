@@ -10,8 +10,10 @@ enum class TokenType {
     KW_TRUE,      // 真
     KW_FALSE,     // 假
     KW_IF,        // 如果
-    KW_ELSE,      // 否则
-    KW_WHILE,     // 只要
+    KW_ELIF,      // 否则
+    KW_ELSE,      // 其他
+    KW_WHILE,     // 当
+    KW_FOR,       // 循环
     KW_RETURN,    // 返回
     KW_MAIN,      // 主函数
     KW_INPUT,     // 输入
@@ -25,7 +27,7 @@ enum class TokenType {
     CHAR_LITERAL,
 
     // Punctuation
-    LPAREN, RPAREN,       // ( )
+    LPAREN, RPAREN,       // （）or ()
     LBRACE, RBRACE,       // { }
     COMMA,                // ，or ,
     PERIOD,                // 。  - statement terminator
@@ -34,6 +36,7 @@ enum class TokenType {
     LESS, GREATER, LESS_EQUAL, GREATER_EQUAL,
     EQUAL_EQUAL, NOT_EQUAL,
     PLUS_PLUS, MINUS_MINUS, //++, --
+    SEMICOLON, // ；
 
     END_OF_FILE,
     UNKNOWN

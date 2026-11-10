@@ -36,7 +36,7 @@ int main() {
     }
 
     // --- keywords and identifiers ---
-    CHECK(types("整数 如果 否则 只要 返回", {T::KW_INT, T::KW_IF, T::KW_ELSE, T::KW_WHILE, T::KW_RETURN}), "keywords");
+    CHECK(types("整数 如果 否则 其他 当 返回", {T::KW_INT, T::KW_IF, T::KW_ELIF, T::KW_ELSE, T::KW_WHILE, T::KW_RETURN}), "keywords");
     CHECK(types("甲", {T::IDENTIFIER}), "chinese identifier");
     CHECK(types("count", {T::IDENTIFIER}), "english identifier");
     CHECK(types("my_var2", {T::IDENTIFIER}), "identifier with underscore and digit");
@@ -74,7 +74,7 @@ int main() {
     // --- edge cases that may expose problems ---
     CHECK(types("", {}), "empty file");
     CHECK(types("   \n\t ", {}), "whitespace only");
-    CHECK(types("（", {T::UNKNOWN}), "fullwidth paren is UNKNOWN");
+    CHECK(types("（", {T::LPAREN}), "fullwidth paren is LPAREN");
     CHECK(types("\xEF\xBB\xBF" "整数", {T::KW_INT}), "UTF-8 BOM at file start is ignored");
     CHECK(types("“abc", {T::STRING_LITERAL}), "unterminated string (currently accepted silently)");
 

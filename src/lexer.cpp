@@ -83,8 +83,10 @@ const std::unordered_map<std::u32string, TokenType> Lexer::keywords = {
     {U"真",   TokenType::KW_TRUE},
     {U"假",   TokenType::KW_FALSE},
     {U"如果", TokenType::KW_IF},
-    {U"否则", TokenType::KW_ELSE},
-    {U"只要", TokenType::KW_WHILE},
+    {U"否则", TokenType::KW_ELIF},
+    {U"其他", TokenType::KW_ELSE},
+    {U"当",   TokenType::KW_WHILE},
+    {U"循环", TokenType::KW_FOR},
     {U"返回", TokenType::KW_RETURN},
     {U"主函数", TokenType::KW_MAIN},
     {U"输入", TokenType::KW_INPUT},
@@ -194,10 +196,10 @@ Token Lexer::lexSymbol() {
     char32_t c = advance();
 
     switch (c) {
-        case U'(': return makeToken(TokenType::LPAREN, U"(", startLine, startCol);
-        case U')': return makeToken(TokenType::RPAREN, U")", startLine, startCol);
-        case U'{': return makeToken(TokenType::LBRACE, U"{", startLine, startCol);
-        case U'}': return makeToken(TokenType::RBRACE, U"}", startLine, startCol);
+        case U'（': return makeToken(TokenType::LPAREN, U"（", startLine, startCol);
+        case U'）': return makeToken(TokenType::RPAREN, U"）", startLine, startCol);
+        case U'｛': return makeToken(TokenType::LBRACE, U"{", startLine, startCol);
+        case U'｝': return makeToken(TokenType::RBRACE, U"}", startLine, startCol);
         case U',':
         case 0xFF0C: // ，(fullwidth comma)
             return makeToken(TokenType::COMMA, U",", startLine, startCol);
@@ -245,9 +247,9 @@ std::vector<Token> Lexer::tokenize() {
             tokens.push_back(lexIdentifierOrKeyword());
         } else if (isDigit(c)) {
             tokens.push_back(lexNumber());
-        } else if (c == U'“') {
+        } else if (c == U'“' || c == U'"') {
             tokens.push_back(lexString());
-        } else if (c == U'‘') {
+        } else if (c == U'‘' || c == U'\'') {
             tokens.push_back(lexChar());
         } else {
             tokens.push_back(lexSymbol());
