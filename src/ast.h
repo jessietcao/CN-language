@@ -39,7 +39,8 @@
 //  - Stmt::print(n)  indented tree, for eyeballing whole programs.
 //
 // Later passes (type checker, codegen) can switch on the node type with
-// dynamic_cast, or you can add a visitor once you know what they need.
+// dynamic_cast, or a visitor can be added. 
+// For now, the parser just builds the tree and prints it.
 // ---------------------------------------------------------------
 
 // Source names for a type keyword / an operator token, for printing.
