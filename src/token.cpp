@@ -10,8 +10,10 @@ std::string tokenTypeName(TokenType type) {
         case TokenType::KW_TRUE: return "KW_TRUE";
         case TokenType::KW_FALSE: return "KW_FALSE";
         case TokenType::KW_IF: return "KW_IF";
+        case TokenType::KW_ELIF: return "KW_ELIF";
         case TokenType::KW_ELSE: return "KW_ELSE";
         case TokenType::KW_WHILE: return "KW_WHILE";
+        case TokenType::KW_FOR: return "KW_FOR";
         case TokenType::KW_RETURN: return "KW_RETURN";
         case TokenType::KW_MAIN: return "KW_MAIN";
         case TokenType::KW_INPUT: return "KW_INPUT";
@@ -41,6 +43,7 @@ std::string tokenTypeName(TokenType type) {
         case TokenType::PLUS_PLUS: return "PLUS_PLUS";
         case TokenType::MINUS_MINUS: return "MINUS_MINUS";
         case TokenType::END_OF_FILE: return "END_OF_FILE";
+        case TokenType::SEMICOLON: return "SEMICOLON";
         default: return "UNKNOWN";
     }
 }

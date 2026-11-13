@@ -196,8 +196,12 @@ Token Lexer::lexSymbol() {
     char32_t c = advance();
 
     switch (c) {
-        case U'（': return makeToken(TokenType::LPAREN, U"（", startLine, startCol);
-        case U'）': return makeToken(TokenType::RPAREN, U"）", startLine, startCol);
+        case U'(':
+        case 0xFF08: // （
+            return makeToken(TokenType::LPAREN, U"(", startLine, startCol);
+        case U')':
+        case 0xFF09: // ）
+            return makeToken(TokenType::RPAREN, U")", startLine, startCol);
         case U'｛': return makeToken(TokenType::LBRACE, U"{", startLine, startCol);
         case U'｝': return makeToken(TokenType::RBRACE, U"}", startLine, startCol);
         case U',':
@@ -205,6 +209,9 @@ Token Lexer::lexSymbol() {
             return makeToken(TokenType::COMMA, U",", startLine, startCol);
         case 0x3002: // 。(ideographic full stop) — statement terminator
             return makeToken(TokenType::PERIOD, U"。", startLine, startCol);
+        case U';':
+        case 0xFF1B: // ；(fullwidth semicolon)
+            return makeToken(TokenType::SEMICOLON, U";", startLine, startCol);
         case U'=':
             if (peek() == U'=') { advance(); return makeToken(TokenType::EQUAL_EQUAL, U"==", startLine, startCol); }
             return makeToken(TokenType::ASSIGN, U"=", startLine, startCol);

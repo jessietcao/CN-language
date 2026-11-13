@@ -78,6 +78,9 @@ int main() {
     CHECK(types("\xEF\xBB\xBF" "整数", {T::KW_INT}), "UTF-8 BOM at file start is ignored");
     CHECK(types("“abc", {T::STRING_LITERAL}), "unterminated string (currently accepted silently)");
 
+    CHECK(types("; ；", {T::SEMICOLON, T::SEMICOLON}), "ascii and fullwidth semicolon");
+    CHECK(types("（甲）", {T::LPAREN, T::IDENTIFIER, T::RPAREN}), "fullwidth parens");
+
     std::cout << "\n" << (total - failures) << "/" << total << " passed\n";
     return failures ? 1 : 0;
 }
